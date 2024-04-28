@@ -11,7 +11,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class HOME extends AppCompatActivity {
 
-    private Button oms, bano;
+    private Button oms, bano, consumo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,12 +27,17 @@ public class HOME extends AppCompatActivity {
         // Aquí agregamos el código para iniciar la actividad "OMS" cuando se hace clic en el botón "oms"
         oms = findViewById(R.id.OMS_agua);
         bano = findViewById(R.id.BanoB);
+        consumo = findViewById(R.id.ConsumoB);
         oms.setOnClickListener(v -> {
             Intent intent = new Intent(HOME.this, OMS.class);
             startActivity(intent);
         });
         bano.setOnClickListener(v -> {
             Intent intent = new Intent(HOME.this, TimerB.class);
+            startActivity(intent);
+        });
+        consumo.setOnClickListener(v -> {
+            Intent intent = new Intent(HOME.this, AguaStatus.class);
             startActivity(intent);
         });
     }
