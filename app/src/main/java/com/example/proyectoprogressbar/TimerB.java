@@ -16,8 +16,7 @@ public class TimerB extends AppCompatActivity {
 
     private ProgressBar progressBar;
     private TextView progressText;
-    private Button tresMinButton;
-    private Button cincoMinButton;
+    private Button tresMinButton, cincoMinButton, startbutton;
     private int totalTimeInSeconds = 0;
     private int elapsedTimeInSeconds = 0;
     private final int intervalInMillis = 1000; // Intervalo de actualización en milisegundos
@@ -33,6 +32,7 @@ public class TimerB extends AppCompatActivity {
         progressText = findViewById(R.id.pro_text);
         tresMinButton = findViewById(R.id.tres_min);
         cincoMinButton = findViewById(R.id.cinco_min);
+        startbutton = findViewById(R.id.start_button);
 
         // Configurar el listener del botón de 3 minutos
         tresMinButton.setOnClickListener(new View.OnClickListener() {
@@ -59,15 +59,26 @@ public class TimerB extends AppCompatActivity {
     }
 
     // Método para iniciar el temporizador
+// Método para iniciar o detener el temporizador según el estado actual
     public void startTimer(View view) {
-        if (totalTimeInSeconds > 0) {
-            elapsedTimeInSeconds = 0;
-            handler.postDelayed(timerRunnable, intervalInMillis);
+        // Verificar si el temporizador está en marcha
+        if (handler.hasCallbacks(timerRunnable)) {
+            // Si está en marcha, detener el temporizador
+            handler.removeCallbacks(timerRunnable);
+            startbutton.setText("Start");
         } else {
-            // Si no se ha seleccionado una duración válida, mostrar un mensaje de error
-            Toast.makeText(this, "Please select a timer duration.", Toast.LENGTH_SHORT).show();
+            // Si no está en marcha, iniciar el temporizador
+            if (totalTimeInSeconds > 0) {
+                elapsedTimeInSeconds = 0;
+                handler.postDelayed(timerRunnable, intervalInMillis);
+                startbutton.setText("Stop");
+            } else {
+                // Si no se ha seleccionado una duración válida, mostrar un mensaje de error
+                Toast.makeText(this, "Please select a timer duration.", Toast.LENGTH_SHORT).show();
+            }
         }
     }
+
 
     // Método para detener el temporizador
     public void stopTimer(View view) {
@@ -92,9 +103,16 @@ public class TimerB extends AppCompatActivity {
                 progressText.setText(formatTime(elapsedTimeInSeconds));
                 elapsedTimeInSeconds++;
                 handler.postDelayed(this, intervalInMillis);
+                startbutton.setText("Stop");
             } else {
+                int progress = (int) (((float) elapsedTimeInSeconds / totalTimeInSeconds) * 100);
+                progressBar.setProgress(progress);
+                progressText.setText(formatTime(elapsedTimeInSeconds));
+                elapsedTimeInSeconds++;
+                handler.postDelayed(this, intervalInMillis);
                 playAlarmSound();
                 handler.removeCallbacks(this);
+                startbutton.setText("Restart");
             }
         }
     };
