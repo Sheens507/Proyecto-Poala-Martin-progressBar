@@ -5,10 +5,10 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OMS">
+    tools:context=".consejos">
 
     <WebView
-        android:id="@+id/OMS_agua"
+        android:id="@+id/ConsejosView"
         android:layout_width="409dp"
         android:layout_height="729dp"
         app:layout_constraintBottom_toBottomOf="parent"
