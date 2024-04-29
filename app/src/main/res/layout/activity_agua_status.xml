@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
-            android:text="Consumo\nde agua"
+            android:text="Mi Consumo\nde agua"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="30sp"
