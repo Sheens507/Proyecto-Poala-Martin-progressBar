@@ -4,4 +4,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="colorPrimary">#76ABAE</color>
     <color name="colorBorde">#EEEEEE</color>
+    <color name="Button">#b6e1ff</color>
+
 </resources>
